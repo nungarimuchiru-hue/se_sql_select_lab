@@ -77,7 +77,7 @@ FROM employees;
 # Numeric function
 sum_total_price = pd.read_sql("""
 SELECT
-    SUM(UnitPrice) AS Total_Price
+    SUM(buyPrice) AS Total_Price
 FROM products;
 """, conn)
 
@@ -86,7 +86,7 @@ FROM products;
 # Date formatting
 df_day_month_year = pd.read_sql("""
 SELECT
-    BirthDate,
-    strftime('%d-%m-%Y', BirthDate) AS Day_Month_Year
-FROM employees;
+    orderDate,
+    strftime('%d-%m-%Y', orderDate) AS Day_Month_Year
+FROM orders;
 """, conn)
