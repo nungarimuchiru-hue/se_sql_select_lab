@@ -84,9 +84,9 @@ FROM products;
 # Date formatting
 df_day_month_year = pd.read_sql("""
 SELECT
-    birth_date,
-    strftime('%d', birth_date) AS day,
-    strftime('%m', birth_date) AS month,
-    strftime('%Y', birth_date) AS year
+    BirthDate,
+    strftime('%d', BirthDate) AS day,
+    strftime('%m', BirthDate) AS month,
+    strftime('%Y', BirthDate) AS year
 FROM employees;
 """, conn)
