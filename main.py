@@ -18,12 +18,11 @@ LIMIT 5;
 
 
 # STEP 3
-# Five employees in reverse order
+# Five employees in reverse order (Adjust columns based on your prompt, e.g., employeeNumber and lastName)
 df_five_reverse = pd.read_sql("""
-SELECT *
+SELECT employeeNumber, lastName
 FROM employees
-ORDER BY employeeNumber DESC
-LIMIT 5;
+ORDER BY employeeNumber DESC;
 """, conn)
 
 
@@ -31,9 +30,10 @@ LIMIT 5;
 # Aliasing columns
 df_alias = pd.read_sql("""
 SELECT
-    firstName AS First_Name,
-    lastName AS Last_Name,
-    jobTitle AS Job_Title
+    employeeNumber AS ID,
+    firstName AS first_name,
+    lastName AS last_name,
+    jobTitle AS job_title
 FROM employees;
 """, conn)
 
@@ -48,27 +48,25 @@ SELECT
     CASE
         WHEN jobTitle LIKE '%Manager%' THEN 'Executive'
         ELSE 'Staff'
-    END AS Employee_Type
+    END AS role
 FROM employees;
 """, conn)
-
 
 # STEP 6
 # String function
 df_name_length = pd.read_sql("""
 SELECT
     firstName,
-    LENGTH(firstName) AS Name_Length
+    LENGTH(firstName) AS name_length
 FROM employees;
 """, conn)
-
 
 # STEP 7
 # Short title using SUBSTR
 df_short_title = pd.read_sql("""
 SELECT
     jobTitle,
-    SUBSTR(jobTitle, 1, 10) AS Short_Title
+    SUBSTR(jobTitle, 1, 10) AS short_title
 FROM employees;
 """, conn)
 
@@ -77,7 +75,7 @@ FROM employees;
 # Numeric function
 sum_total_price = pd.read_sql("""
 SELECT
-    SUM(buyPrice) AS Total_Price
+    SUM(price) AS total_price
 FROM products;
 """, conn)
 
@@ -86,7 +84,9 @@ FROM products;
 # Date formatting
 df_day_month_year = pd.read_sql("""
 SELECT
-    orderDate,
-    strftime('%d-%m-%Y', orderDate) AS Day_Month_Year
-FROM orders;
+    birth_date,
+    strftime('%d', birth_date) AS day,
+    strftime('%m', birth_date) AS month,
+    strftime('%Y', birth_date) AS year
+FROM employees;
 """, conn)
