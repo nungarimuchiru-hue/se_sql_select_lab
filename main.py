@@ -75,7 +75,7 @@ FROM employees;
 # Numeric function
 sum_total_price = pd.read_sql("""
 SELECT
-    SUM(price) AS total_price
+    SUM(buyPrice) AS total_price
 FROM products;
 """, conn)
 
